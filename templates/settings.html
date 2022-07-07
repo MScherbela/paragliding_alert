@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="form-row">
+                        <h2>Your settings</h2>
+                    </div>
+                    <div class="form-row mt-3">
+                        <h4>Weather</h4>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.max_wind.label }} {{ form.max_wind(class_='form-control') }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.max_gust.label }} {{ form.max_gust(class_='form-control') }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.max_prec.label }} {{ form.max_prec(class_='form-control') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row mt-4">
+                        <h4>Time</h4>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.start_time_weekday.label }} {{ form.start_time_weekday(class_='form-control') }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.start_time_friday.label }} {{ form.start_time_friday(class_='form-control') }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.start_time_weekend.label }} {{ form.start_time_weekend(class_='form-control') }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.end_time.label }} {{ form.end_time(class_='form-control') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.min_window.label }} {{ form.min_window(class_='form-control') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row mt-4">
+                        <h4>Alerts</h4>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="custom-control custom-switch">
+                                {{ form.can_weekday(class_='custom-control-input') }}
+                                {{ form.can_weekday.label(class_='custom-control-label') }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="custom-control custom-switch">
+                                {{ form.can_friday(class_='custom-control-input') }}
+                                {{ form.can_friday.label(class_='custom-control-label') }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="custom-control custom-switch">
+                                {{ form.can_weekend(class_='custom-control-input') }}
+                                {{ form.can_weekend.label(class_='custom-control-label') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row mt-4">
+                        <div class="col">
+                            {{ form.submit(class_='btn btn-primary') }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

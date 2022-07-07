@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h2>Test actions</h2>
+        <form action="" method="post">
+            <div class="form-row"><input type="submit" class="btn btn-danger" name='reload_weather' value="Call weather API"/></div>
+            <div class="form-row"><input type="submit" class="btn btn-danger" name='send_alerts' value="Send alerts"/></div>
+        </form>
+    </div>
+{% endblock %}

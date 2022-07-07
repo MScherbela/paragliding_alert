@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col">
+                <h2>Add launch site</h2>
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.name.label }} {{ form.name(class_='form-control') }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.lat.label }} {{ form.lat(class_='form-control') }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.lon.label }} {{ form.lon(class_='form-control') }}
+                    </div>
+                    {{ form.submit(class_='btn btn-primary') }}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

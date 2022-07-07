@@ -1,0 +1,12 @@
+gunicorn
+flask
+flask-admin
+flask-bcrypt
+flask-compress
+flask-sqlalchemy
+flask-wtf
+flask-security
+email_validator
+flask-apscheduler
+requests
+bs4

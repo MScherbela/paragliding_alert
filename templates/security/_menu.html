@@ -1,0 +1,21 @@
+{% if security.registerable or security.recoverable or security.confirmable %}
+    <div class="mt-4">
+        <h4>Security options</h4>
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-secondary" href="
+                        {{ url_for_security('login') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">{{ _('Login') }}</a>
+                {% if security.registerable %}
+                    <a class="btn btn-secondary" href="
+                            {{ url_for_security('register') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">{{ _('Register') }}</a>
+                {% endif %}
+                {% if security.recoverable %}
+                    <a class="btn btn-secondary" href="{{ url_for_security('forgot_password') }}">{{ _('Forgot password') }}</a>
+                {% endif %}
+                {% if security.confirmable %}
+                    <a class="btn btn-secondary" href="{{ url_for_security('send_confirmation') }}">{{ _('Confirm account') }}</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}
