@@ -14,7 +14,7 @@ import plotly.graph_objects as go
 from alerts import send_paragliding_alert
 import logging
 
-logging.basicConfig("/logs/paragliding_alert.log", level=logging.DEBUG,
+logging.basicConfig(filename="/logs/paragliding_alert.log", level=logging.DEBUG,
                         format='%(asctime)s %(levelname)-8s %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
 app = flask.Flask(__name__)
