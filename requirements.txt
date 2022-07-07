@@ -10,3 +10,4 @@ email_validator
 flask-apscheduler
 requests
 bs4
+plotly
