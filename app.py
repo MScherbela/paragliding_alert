@@ -2,7 +2,6 @@ import datetime
 import flask_security
 import flask_login
 import utils
-from logger import logging
 import flask
 from extensions import db, scheduler, mail, init_extensions
 from flask_wtf import FlaskForm
@@ -13,6 +12,7 @@ from models import Location, ConditionFilter, User
 import weather
 import plotly.graph_objects as go
 from alerts import send_paragliding_alert
+import logging
 
 logging.basicConfig("/logs/paragliding_alert.log", level=logging.DEBUG,
                         format='%(asctime)s %(levelname)-8s %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
