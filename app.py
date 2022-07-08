@@ -5,7 +5,7 @@ import utils
 import flask
 from extensions import db, scheduler, mail, init_extensions
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, FloatField, TimeField, IntegerField, BooleanField
+from wtforms import StringField, SubmitField, FloatField, TimeField, IntegerField, BooleanField, SelectField
 from wtforms.validators import DataRequired
 from flask_security.decorators import login_required, current_user
 from models import Location, ConditionFilter, User
@@ -37,12 +37,28 @@ def retrieve_all_weather_data():
 
 
 def send_all_paragliding_alerts():
-    N_DAYS_MAX = 4
+    now = datetime.datetime.now()
     for user in User.query.all():
         _, daily_data = get_weather_data_for_user(user)
+        cond_filter = user.condition_filter
         flyable_locations = []
         for loc in daily_data:
-            flyable_days = [d for d, s in zip(loc['days'][:N_DAYS_MAX], loc['status'][:N_DAYS_MAX]) if s >= weather.WeatherStatus.MAYBE]
+            flyable_days = []
+            for day, status in zip(loc['days'], loc['status']):
+                if status == weather.WeatherStatus.NO:
+                    continue
+                if day - now > datetime.timedelta(days=4):
+                    continue
+                if day - now < datetime.timedelta(hours=-16):
+                    continue
+                if day.weekday() <= 3:
+                    required_status = cond_filter.alert_level_weekday
+                elif day.weekday() == 4:
+                    required_status = cond_filter.alert_level_friday
+                else:
+                    required_status = cond_filter.alert_level_weekend
+                if status >= required_status:
+                    flyable_days.append(day)
             if flyable_days:
                 flyable_locations.append(dict(name=loc['name'], days=flyable_days))
         if flyable_locations:
@@ -65,9 +81,9 @@ class ConditionFilterForm(FlaskForm):
     start_time_weekend = TimeField("Start time Sat-Sun", validators=[DataRequired()])
     end_time = TimeField("End time", validators=[DataRequired()])
     min_window = IntegerField("Minimum flyable window [h]", validators=[DataRequired()])
-    can_weekday = BooleanField("Alerts for Mon-Thu")
-    can_friday = BooleanField("Alerts for Friday")
-    can_weekend = BooleanField("Alerts for Sat-Sun")
+    alert_level_weekday = SelectField("Alerts for Mon-Thu", choices=([('3', 'No alerts'), ('2', 'Best conditions only'), ('1', 'All alerts')]), coerce=int)
+    alert_level_friday = SelectField("Alerts for Friday", choices=([('3', 'No alerts'), ('2', 'Best conditions only'), ('1', 'All alerts')]), coerce=int)
+    alert_level_weekend = SelectField("Alerts for Sat-Sun", choices=([('3', 'No alerts'), ('2', 'Best conditions only'), ('1', 'All alerts')]), coerce=int)
 
 def get_weather_data_for_user(user):
     user_locations = Location.query.filter_by(active=True, user_id=user.id).all()

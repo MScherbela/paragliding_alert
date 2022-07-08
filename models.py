@@ -37,16 +37,16 @@ class Location(db.Model):
 class ConditionFilter(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    max_wind = db.Column(db.Float, default=20)
-    max_gust = db.Column(db.Float, default=30)
-    max_prec = db.Column(db.Float, default=1.0)
+    max_wind = db.Column(db.Float, default=15)
+    max_gust = db.Column(db.Float, default=25)
+    max_prec = db.Column(db.Float, default=0.5)
     start_time_weekday = db.Column(db.Time, default=datetime.time(hour=16))
     start_time_friday = db.Column(db.Time, default=datetime.time(hour=14))
     start_time_weekend = db.Column(db.Time, default=datetime.time(hour=7))
     end_time = db.Column(db.Time, default=datetime.time(hour=21))
-    can_weekend = db.Column(db.Boolean, default=True)
-    can_friday = db.Column(db.Boolean, default=True)
-    can_weekday = db.Column(db.Boolean, default=False)
-    min_window = db.Column(db.Integer, default=4) # in hours
+    alert_level_weekday = db.Column(db.Integer, default=3)
+    alert_level_friday = db.Column(db.Integer, default=2)
+    alert_level_weekend = db.Column(db.Integer, default=1)
+    min_window = db.Column(db.Integer, default=3) # in hours
 
 

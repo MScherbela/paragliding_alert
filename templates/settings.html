@@ -66,21 +66,18 @@
                     </div>
                     <div class="form-row">
                         <div class="col">
-                            <div class="custom-control custom-switch">
-                                {{ form.can_weekday(class_='custom-control-input') }}
-                                {{ form.can_weekday.label(class_='custom-control-label') }}
+                            <div class="form-group">
+                                {{ form.alert_level_weekday.label }} {{ form.alert_level_weekday(class_='form-control') }}
                             </div>
                         </div>
                         <div class="col">
-                            <div class="custom-control custom-switch">
-                                {{ form.can_friday(class_='custom-control-input') }}
-                                {{ form.can_friday.label(class_='custom-control-label') }}
+                            <div class="form-group">
+                                {{ form.alert_level_friday.label }} {{ form.alert_level_friday(class_='form-control') }}
                             </div>
                         </div>
                         <div class="col">
-                            <div class="custom-control custom-switch">
-                                {{ form.can_weekend(class_='custom-control-input') }}
-                                {{ form.can_weekend.label(class_='custom-control-label') }}
+                            <div class="form-group">
+                                {{ form.alert_level_weekend.label }} {{ form.alert_level_weekend(class_='form-control') }}
                             </div>
                         </div>
                     </div>
