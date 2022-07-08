@@ -1,5 +1,3 @@
-import dotenv
-dotenv.load_dotenv("paragliding.env")
 from app import db, app
 import os
 from flask_security.utils import hash_password
